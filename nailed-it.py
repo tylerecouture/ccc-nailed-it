@@ -51,175 +51,11 @@ length 1 by choosing any two pieces of wood to nail together. Specifically, he m
 a fence of height 11, 101, 1001, 2001, 110, 1010, 2010, 1100, 2100, 3000
 """
 
-import math 
-
 raw_data = input("Enter a space seperated list of wood pieces: (e.g: \"1 10 100 1000 2000\")")  # Sample Input 1: 1 2 3 4 5 6
 
 # Generate a list of integers from the string
 wood_lengths = [int(i) for i in raw_data.split()]
 print("Converted to list of integers: ", wood_lengths)
-
-
-# STEP 1 - Figure out the pattern:
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0) + all_woods.pop(0)]
-# woods2 = [all_woods.pop(0) + all_woods.pop(0)]
-# woods3 = [all_woods.pop(0) + all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0) + all_woods.pop(0)]
-# woods2 = [all_woods.pop(0) + all_woods.pop(1)]
-# woods3 = [all_woods.pop(0) + all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0) + all_woods.pop(0)]
-# woods2 = [all_woods.pop(0) + all_woods.pop(2)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(1)]
-# woods2 = [all_woods.pop(0), all_woods.pop(0)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(1)]
-# woods2 = [all_woods.pop(0), all_woods.pop(1)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(1)]
-# woods2 = [all_woods.pop(0), all_woods.pop(2)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(2)]
-# woods2 = [all_woods.pop(0), all_woods.pop(0)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(2)]
-# woods2 = [all_woods.pop(0), all_woods.pop(1)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(2)]
-# woods2 = [all_woods.pop(0), all_woods.pop(2)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(3)]
-# woods2 = [all_woods.pop(0), all_woods.pop(0)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(3)]
-# woods2 = [all_woods.pop(0), all_woods.pop(1)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-# all_woods = wood_lengths.copy()
-# woods1 = [all_woods.pop(0), all_woods.pop(3)]
-# woods2 = [all_woods.pop(0), all_woods.pop(2)]
-# woods3 = [all_woods.pop(0), all_woods.pop(0)]
-# boards = ((woods1, woods2, woods3))
-# fences.append(boards)
-
-    
-# print(fences)
-
-
-# STEP 2 - Try it in nested loops (we know it will need recursion eventually)
-def board_combinations(wood_lengths):
-    """ 
-    Given a list of wood lengths (e.g. [1,2,3,4]), find all possible board combinations
-    Remember: wood = 1 piece, board = 2 pieces of wood.
-    1 + 2 = 3 and 3 + 4 = 7
-    1 + 3 and 2 + 4
-    1 + 4 and 2 + 3
-    Return a list of tuples for example: [(3, 7), (4, 6), (5, 5)]
-    """
-
-    n = len(wood_lengths)
-    r = 2
-    # number of possible combos of = n! / (r! (n - r)!)
-    # 4! / (2!(4-2)!) = 24 / (2(2)!) = 24 / 4 = 6
-    # num_combos = math.factorial(n) / (math.factorial(r)*math.factorial(n - r))
-    # print(num_combos)
-
-    fences = []
-    for i in range(n-1):
-        for j in range(n-3):
-            for k in range(n-5):
-                all_woods = wood_lengths.copy()
-                boards = []
-                boards.append(all_woods.pop(0) + all_woods.pop(i))
-                boards.append(all_woods.pop(0) + all_woods.pop(j))
-                boards.append(all_woods.pop(0) + all_woods.pop(k))
-                # boards.append(all_woods.pop(0) + all_woods.pop(0))
-                fences.append(tuple(boards))
-        
-    print("Fences: ", fences) 
-
-# board_combinations(wood_lengths)
-
-
-# STEP 3 - RECURSION
-fences = []  # global
-next_fence = False  # global
-
-def generate_fence(wood_lengths_remaining, original=True):
-    global next_fence
-    global fences
-    print(len(inspect.stack(0)))
-
-    n = len(wood_lengths_remaining)
-    fence = []
-    if n < 2:
-        next_fence = True
-        return []
-    else:
-        for i in range(n-1):
-            if next_fence:
-                wood_lengths_remaining = wood_lengths.copy()  # reset to try another fence.
-
-                next_fence = False
-                fences.append(fence)
-                fence = []
-            fence += [wood_lengths_remaining.pop(0) + wood_lengths_remaining.pop(i)]
-            fence += generate_fence(wood_lengths_remaining, False)
-
-    if original:
-        fences.append(fence)
-
-    return fence
-
-
-# generate_fence(wood_lengths.copy())
-# print(list(fences))
-# print(fences)
 
 
 def generate_fences(wood_list):
@@ -228,14 +64,17 @@ def generate_fences(wood_list):
 
     Sample Input: wood_list = [1, 10, 100, 1000, 2000] 
     would return a generator equivalent to 
-    [[11, 1100], [11, 2100], [101, 1010], [101, 2010], [1001, 110], [1001, 2010], [2001, 110], [2001, 1010]]
+    [[110, 3000], [1010, 2100], [2010, 1100], [101, 3000], [1001, 2100], [2001, 1100], [11, 3000], 
+    [1001, 2010], [2001, 1010], [11, 2100], [101, 2010], [2001, 110], [11, 1100], [101, 1010], [1001, 110]]
+    
     """
     num_pieces_of_wood_left = len(wood_list)
 
     if num_pieces_of_wood_left == 2:  # if there are less than 2 pieces of wood left, then we're done this round
+        # add them up to get board length and return as a single element list
         yield [wood_list[0] + wood_list[1]]
 
-    elif  num_pieces_of_wood_left % 2 == 0:  # even number of pieces that isn't exactly 2
+    elif num_pieces_of_wood_left % 2 == 0:  # even number of pieces that isn't exactly 2
         # We have at least 2 pieces of wood we need to pair up (and an even total number)
 
         # pop the first piece of wood off the list, and start pairing it up with other pieces of wood
@@ -263,7 +102,7 @@ def generate_fences(wood_list):
 
         # put the first board back in at the front.  We need it there because we poppoed it out
         # Doesn't do anything on the first time through, but when recursing, we need the list built back up again
-        wood_list.insert(0, first) 
+        wood_list.insert(0, first)
     
     else:  # odd number of pieces of wood (this will only ever happen on the first pass)
 
@@ -280,5 +119,3 @@ def generate_fences(wood_list):
 
 fences = generate_fences(wood_lengths)
 print(list(fences))
-
-

@@ -187,38 +187,40 @@ def board_combinations(wood_lengths):
 # board_combinations(wood_lengths)
 
 
-fences = []
 # https://stackoverflow.com/questions/5360220/how-to-split-a-list-into-pairs-in-all-possible-ways
 
 
 # STEP 3 - RECURSION
-fence = []
 fences = []  # global
-next_fence = False
+next_fence = False  # global
 
 
-def generate_fence(wood_lengths_remaining):
-    n = len(wood_lengths_remaining)
-    fences = []
-    fence = []
-    global wood_lengths
+def generate_fence(wood_lengths_remaining, original=True):
     global next_fence
+    global fences
+
+    n = len(wood_lengths_remaining)
+    fence = []
     if n < 2:
         next_fence = True
         return []
     else:
         for i in range(n-1):
+            fence += [wood_lengths_remaining.pop(0) + wood_lengths_remaining.pop(i)]
+            fence += generate_fence(wood_lengths_remaining, False)
+
             if next_fence:
-                wood_lengths_remaining = wood_lengths.copy() # reset to try another fence.
+                wood_lengths_remaining = wood_lengths.copy()  # reset to try another fence.
                 next_fence = False
-            fences += [wood_lengths_remaining.pop(0) + wood_lengths_remaining.pop(i)]
-            fences += generate_fence(wood_lengths_remaining)
+                fences.append(fence)
+                fence = []
 
-    return fences
+    return fence
 
 
-print(generate_fence(wood_lengths.copy()))
-
+generate_fence(wood_lengths.copy())
+print(list(fences))
+# print(fences)
 
 # print(combos)
 # print(fences)
